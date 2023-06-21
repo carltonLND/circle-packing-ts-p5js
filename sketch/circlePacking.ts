@@ -47,10 +47,15 @@ function distance(p1: Position, p2: Position): number {
   return hyp;
 }
 
-function randomCircle(areaWidth: number, areaHeight: number): CircleData {
+function randomCircle(
+  areaWidth: number,
+  areaHeight: number,
+  minSize = 10,
+  maxSize = 100
+): CircleData {
   return {
     position: { x: random(0, areaWidth), y: random(0, areaHeight) },
-    radius: random(10, 100),
+    radius: random(minSize, maxSize),
   };
 }
 
