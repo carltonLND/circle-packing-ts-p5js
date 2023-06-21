@@ -22,14 +22,17 @@ interface Position {
  */
 function calculatePackedCircles(
   areaWidth: number,
-  areaHeight: number
+  areaHeight: number,
+  minSize?: number,
+  maxSize?: number,
+  minDistance?: number
 ): CircleData[] {
   const validatedCircles: CircleData[] = [];
 
   for (let i = 0; i < 10000; i++) {
-    const candidate = randomCircle(areaWidth, areaHeight);
+    const candidate = randomCircle(areaWidth, areaHeight, minSize, maxSize);
 
-    if (!isOverlapping(candidate, validatedCircles, 50)) {
+    if (!isOverlapping(candidate, validatedCircles, minDistance)) {
       validatedCircles.push(candidate);
     }
   }
