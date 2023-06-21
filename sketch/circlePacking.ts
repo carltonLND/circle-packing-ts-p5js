@@ -4,14 +4,14 @@
 
 /** Represents a conceptual circle - its position and radius */
 interface CircleData {
-    position: Position;
-    radius: number;
+  position: Position;
+  radius: number;
 }
 
 /** Represents a position in 2d space - x and y coordinates. */
 interface Position {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 }
 
 /**
@@ -21,33 +21,48 @@ interface Position {
  * @return an array of generated Circle data objects
  */
 function calculatePackedCircles(
-    areaWidth: number,
-    areaHeight: number
+  areaWidth: number,
+  areaHeight: number
 ): CircleData[] {
-    //TODO: you need to implement this function properly!
+  const validatedCircles: CircleData[] = [];
 
-    //These are just a couple of random CircleData objects, with no consideration yet for avoiding overlap.
-    //We suggest you delete them once you understand what's happening.
+  for (let i = 0; i < 10000; i++) {
+    const candidate = randomCircle(areaWidth, areaHeight);
 
-    const circleDataOne: CircleData = {
-        position: { x: 300, y: 300 },
-        radius: 100,
-    };
-    const circleDataTwo: CircleData = {
-        position: { x: random(0, areaWidth), y: random(0, areaHeight) },
-        radius: 20,
-    };
+    if (!isOverlapping(candidate, validatedCircles)) {
+      validatedCircles.push(candidate);
+    }
+  }
 
-    //TODO: you'll have to return a full array of circle data objects, not just these two placeholders.
-    return [circleDataOne, circleDataTwo];
+  return validatedCircles;
 }
 
 /** Returns the distance between two given positions.
     (This function doesn't require the p5.js library, in case you want to use it in non-p5 projects.)
  */
 function distance(p1: Position, p2: Position): number {
-    const x = p1.x - p2.x;
-    const y = p1.y - p2.y;
-    const hyp = Math.sqrt(x * x + y * y);
-    return hyp;
+  const x = p1.x - p2.x;
+  const y = p1.y - p2.y;
+  const hyp = Math.sqrt(x * x + y * y);
+  return hyp;
+}
+
+function randomCircle(areaWidth: number, areaHeight: number): CircleData {
+  return {
+    position: { x: random(0, areaWidth), y: random(0, areaHeight) },
+    radius: random(10, 100),
+  };
+}
+
+function isOverlapping(circle: CircleData, circleArray: CircleData[]) {
+  for (const circle2 of circleArray) {
+    const dist = distance(circle.position, circle2.position);
+    const radiiSum = circle.radius + circle2.radius;
+
+    if (dist < radiiSum) {
+      return true;
+    }
+  }
+
+  return false;
 }
