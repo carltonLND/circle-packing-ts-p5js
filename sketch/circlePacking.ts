@@ -29,7 +29,7 @@ function calculatePackedCircles(
   for (let i = 0; i < 10000; i++) {
     const candidate = randomCircle(areaWidth, areaHeight);
 
-    if (!isOverlapping(candidate, validatedCircles)) {
+    if (!isOverlapping(candidate, validatedCircles, 50)) {
       validatedCircles.push(candidate);
     }
   }
