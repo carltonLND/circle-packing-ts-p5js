@@ -1,27 +1,27 @@
 //You should not need to change anything in this file for the basic challenge.
 function setup() {
-    createCanvas(windowWidth, windowHeight);
-    noLoop();
+  createCanvas(windowWidth, windowHeight);
+  noLoop();
 }
 
 function draw() {
-    background("white");
+  background("white");
 
-    const circlesArray: CircleData[] = calculatePackedCircles(width, height);
+  const circlesArray: CircleData[] = calculatePackedCircles(width, height);
 
-    for (const c of circlesArray) {
-        drawCircle(c);
-    }
+  for (const c of circlesArray) {
+    drawCircle(c);
+  }
 }
 
 function drawCircle(c: CircleData) {
-    const shade = random(50, 100);
-    fill(shade);
-    noStroke();
-    circle(c.position.x, c.position.y, c.radius * 2);
+  const shade = random(50, 100);
+  fill(shade);
+  noStroke();
+  circle(c.position.x, c.position.y, c.radius * 2);
 }
 
 // If user clicks, draw() will be called again (indirectly)
 function mousePressed() {
-    redraw();
+  redraw();
 }
