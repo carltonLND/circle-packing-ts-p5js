@@ -1,11 +1,14 @@
-//You should not need to change anything in this file for the basic challenge.
+const palette = ["db2763", "b0db43", "12eaea", "bce7fd", "c492b1"].map(
+  (s) => `#${s}`
+);
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noLoop();
 }
 
 function draw() {
-  background("white");
+  background("black");
 
   const circlesArray: CircleData[] = calculatePackedCircles(width, height);
 
@@ -15,13 +18,11 @@ function draw() {
 }
 
 function drawCircle(c: CircleData) {
-  const shade = random(50, 100);
-  fill(shade);
+  fill(random(palette));
   noStroke();
   circle(c.position.x, c.position.y, c.radius * 2);
 }
 
-// If user clicks, draw() will be called again (indirectly)
 function mousePressed() {
   redraw();
 }
