@@ -59,12 +59,16 @@ function randomCircle(
   };
 }
 
-function isOverlapping(circle: CircleData, circleArray: CircleData[]) {
+function isOverlapping(
+  circle: CircleData,
+  circleArray: CircleData[],
+  minDistance = 0
+) {
   for (const circle2 of circleArray) {
     const dist = distance(circle.position, circle2.position);
     const radiiSum = circle.radius + circle2.radius;
 
-    if (dist < radiiSum) {
+    if (dist < radiiSum + minDistance) {
       return true;
     }
   }
