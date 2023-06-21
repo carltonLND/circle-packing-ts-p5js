@@ -10,7 +10,13 @@ function setup() {
 function draw() {
   background("black");
 
-  const circlesArray: CircleData[] = calculatePackedCircles(width, height);
+  const circlesArray: CircleData[] = calculatePackedCircles(
+    width,
+    height,
+    10,
+    20,
+    10
+  );
 
   for (const c of circlesArray) {
     drawCircle(c);
